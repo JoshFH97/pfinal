@@ -2,5 +2,13 @@
     "users": [
       { "id": 1, "name": "John Doe", "email": "john@example.com" },
       { "id": 2, "name": "Jane Smith", "email": "jane@example.com" }
+    ],
+    "products": [
+      { 
+        "id": 1, 
+      "name": "Camisa", 
+      "cantidad": 100, 
+      "marca": "Adidas" 
+     }
     ]
   }

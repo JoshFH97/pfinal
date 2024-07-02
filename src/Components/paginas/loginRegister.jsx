@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
-import {fetchLogin, fetchRegister} from '../../../Fetch/Api';
+import { useEffect, useState } from 'react';
+import {fetchLogin, fetchRegister} from '../../Fetch/Api';
+import { useNavigate } from 'react-router-dom';
+
 
 function Login() {
   const [active, setActive] = useState("login");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [datos, setDatos]=useState()
+  // const navigate = useNavigate()
 
   const handleRegisterClick = () => {
     setActive("register");
@@ -17,14 +21,18 @@ function Login() {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const responseData = await fetchLogin();
-      console.log(responseData);
-    } catch (error) {
-      console.error('Hubo un problema con la solicitud Fetch:', error);
-    }
+    get()
   };
+
+  useEffect(()=>{
+    get()
+  }, []);
+
+  async function get() {
+    const data = await fetchLogin();
+    setDatos(data)
+  }
+
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();

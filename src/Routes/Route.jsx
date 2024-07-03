@@ -1,12 +1,16 @@
-import Home from "../Components/paginas/Home"
-import Login from "../Components/paginas/loginRegister"
+import Home from "../paginas/Home"
+import Login from "../paginas/loginRegister"
+import ContactMsg from "../paginas/Contact"
+import Articles from "../paginas/Products"
 
 function Route() {
 
     return(
         <>
+        <Articles/>
+        {/* <ContactMsg/> */}
         {/* <Home/> */}
-        <Login/>
+        {/* <Login/> */}
         </>
     )
     

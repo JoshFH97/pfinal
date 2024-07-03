@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import {fetchLogin, fetchRegister} from '../../Fetch/Api';
+import {fetchLogin, fetchRegister} from '../Fetch/Api';
 import { useNavigate } from 'react-router-dom';
 
 

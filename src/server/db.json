@@ -1,14 +1,143 @@
 {
-    "users": [
-      { "id": 1, "name": "John Doe", "email": "john@example.com" },
-      { "id": 2, "name": "Jane Smith", "email": "jane@example.com" }
-    ],
-    "products": [
-      { 
-        "id": 1, 
-      "name": "Camisa", 
-      "cantidad": 100, 
-      "marca": "Adidas" 
-     }
-    ]
-  }
+  "users": [
+    {
+      "id": "000",
+      "name": "Admi1",
+      "email": "Admi1@example.com",
+      "password": "Admi1",
+      "administrador": true
+    },
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "john@example.com"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "email": "jane@example.com"
+    },
+    {
+      "id": "9a8e",
+      "name": "1",
+      "email": "1@1.com",
+      "password": "1"
+    },
+    {
+      "id": "e7a8",
+      "name": "1",
+      "email": "1@1.com",
+      "password": "1"
+    },
+    {
+      "id": "7677",
+      "name": "1",
+      "email": "1@1.com",
+      "password": "1"
+    },
+    {
+      "id": "7a92",
+      "name": "1",
+      "email": "1@1.com",
+      "password": "1"
+    }
+  ],
+  "products": [
+    {
+      "id": "e956",
+      "title": "Editado",
+      "price": 699,
+      "image": "https://example.com/new-product-image.jpg",
+      "details": {
+        "display": "6.5″ Super Retina XDR display1",
+        "cameras": [
+          "Ultra Wide",
+          "Wide",
+          "Telephoto"
+        ],
+        "zoom": "5x Optical zoom range",
+        "capacities": [
+          "128GB",
+          "256GB",
+          "512GB"
+        ]
+      }
+    },
+    {
+      "id": "72d7",
+      "title": "Edita 2",
+      "price": 699,
+      "image": "https://example.com/new-product-image.jpg",
+      "details": {
+        "display": "6.5″ Super Retina XDR display1",
+        "cameras": [
+          "Ultra Wide",
+          "Wide",
+          "Telephoto"
+        ],
+        "zoom": "5x Optical zoom range",
+        "capacities": [
+          "128GB",
+          "256GB",
+          "512GB"
+        ]
+      }
+    },
+    {
+      "id": "ac8c",
+      "title": "Edita 3",
+      "price": 2000,
+      "image": "https://example.com/new-product-image.jpg",
+      "details": {
+        "display": "2000",
+        "cameras": [
+          "2000"
+        ],
+        "zoom": "200",
+        "capacities": [
+          "2000"
+        ]
+      }
+    },
+    {
+      "id": "bdd2",
+      "title": "New iPhone",
+      "price": 699,
+      "image": "https://example.com/new-product-image.jpg",
+      "details": {
+        "display": "6.5″ Super Retina XDR display1",
+        "cameras": [
+          "Ultra Wide",
+          "Wide",
+          "Telephoto"
+        ],
+        "zoom": "5x Optical zoom range",
+        "capacities": [
+          "128GB",
+          "256GB",
+          "512GB"
+        ]
+      }
+    },
+    {
+      "id": "b85c",
+      "title": "New iPhone",
+      "price": 699,
+      "image": "https://example.com/new-product-image.jpg",
+      "details": {
+        "display": "6.5″ Super Retina XDR display1",
+        "cameras": [
+          "Ultra Wide",
+          "Wide",
+          "Telephoto"
+        ],
+        "zoom": "5x Optical zoom range",
+        "capacities": [
+          "128GB",
+          "256GB",
+          "512GB"
+        ]
+      }
+    }
+  ]
+}

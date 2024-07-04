@@ -28,7 +28,7 @@ function BasicExample() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  );
+  )
 }
 
 export default BasicExample;

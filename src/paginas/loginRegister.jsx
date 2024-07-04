@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import {fetchLogin, fetchRegister} from '../Fetch/Api';
+import {fetchGet, fetchPost} from '../Fetch/Api';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -29,7 +29,7 @@ function Login() {
   }, []);
 
   async function get() {
-    const data = await fetchLogin();
+    const data = await fetchGet('http://localhost:3001/users');
     setDatos(data)
   }
 
@@ -44,7 +44,7 @@ function Login() {
     };
 
     try {
-      const responseData = await fetchRegister(userData);
+      const responseData = await fetchPost(userData, 'http://localhost:3001/users' );
       console.log(responseData);
     } catch (error) {
       console.error('Hubo un problema con la solicitud Fetch:', error);

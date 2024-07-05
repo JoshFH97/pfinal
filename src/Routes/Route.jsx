@@ -2,14 +2,16 @@ import Home from "../paginas/Home"
 import Login from "../paginas/loginRegister"
 import ContactMsg from "../paginas/Contact"
 import Articles from "../paginas/Products"
+import ColorSchemesExample from '../Componetes/NavBar/NavBar'
 
 function Route() {
 
     return(
         <>
-        <Articles/>
+        <ColorSchemesExample/>
+        {/* <Articles/> */}
         {/* <ContactMsg/> */}
-        {/* <Home/> */}
+        <Home/>
         {/* <Login/> */}
         </>
     )

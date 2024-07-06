@@ -6,7 +6,7 @@ function ColorSchemesExample() {
   return (
     <>
       <Navbar bg="light" data-bs-theme="light">
-        <Container>
+        <Container fluid>
           <Navbar.Brand href="#home">Navbar</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="#home">Home</Nav.Link>

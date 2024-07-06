@@ -1,58 +1,106 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-const ScrollspyExample = () => {
-  useEffect(() => {
-    const scrollSpy = new window.bootstrap.ScrollSpy(document.body, {
-      target: '#list-example',
-      smoothScroll: true,
-    });
-
-    return () => {
-      scrollSpy.dispose();
-    };
-  }, []);
-
+function App() {
   return (
-    <div className="row">
-      <div className="col-4">
-        <div id="list-example" className="list-group">
-          <a className="list-group-item list-group-item-action" href="#list-item-1">
-            Item 1
-          </a>
-          <a className="list-group-item list-group-item-action" href="#list-item-2">
-            Item 2
-          </a>
-          <a className="list-group-item list-group-item-action" href="#list-item-3">
-            Item 3
-          </a>
-          <a className="list-group-item list-group-item-action" href="#list-item-4">
-            Item 4
-          </a>
+    <>
+      <head>
+        <title>Bootstrap Example</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        />
+        <style>
+          {`
+            html, body, #root {
+              height: 100%;
+              margin: 0;
+              display: flex;
+              flex-direction: column;
+            }
+            .navbar {
+              margin-bottom: 0;
+              border-radius: 0;
+            }
+            .content {
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+            }
+            .sidenav {
+              padding-top: 20px;
+              background-color: #f1f1f1;
+              height: 100%;
+            }
+            footer {
+              background-color: #555;
+              color: white;
+              padding: 15px;
+              position: relative;
+              bottom: 0;
+              width: 100%;
+            }
+            @media screen and (max-width: 767px) {
+              .sidenav {
+                height: auto;
+                padding: 15px;
+              }
+              .row.content {
+                height: auto;
+              }
+            }
+          `}
+        </style>
+      </head>
+      <body>
+        <div className="container-fluid text-center content">
+          <div className="row content">
+            <div className="col-sm-2 sidenav">
+              <p>
+                <a href="#">Link</a>
+              </p>
+              <p>
+                <a href="#">Link</a>
+              </p>
+              <p>
+                <a href="#">Link</a>
+              </p>
+            </div>
+            <div className="col-sm-8 text-left">
+              <h1>Welcome</h1>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+              <hr />
+              <h3>Test</h3>
+              <p>Lorem ipsum...</p>
+            </div>
+            <div className="col-sm-2 sidenav">
+              <div className="well">
+                <p>ADS</p>
+              </div>
+              <div className="well">
+                <p>ADS</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="col-8">
-        <div
-          data-bs-spy="scroll"
-          data-bs-target="#list-example"
-          data-bs-smooth-scroll="true"
-          className="scrollspy-example"
-          tabIndex={0}
-          style={{ height: '200px', overflowY: 'scroll' }} // You can adjust height and overflow as needed
-        >
-          <h4 id="list-item-1">Item 1</h4>
-          <p>Contenido de Item 1...</p>
-          <h4 id="list-item-2">Item 2</h4>
-          <p>Contenido de Item 2...</p>
-          <h4 id="list-item-3">Item 3</h4>
-          <p>Contenido de Item 3...</p>
-          <h4 id="list-item-4">Item 4</h4>
-          <p>Contenido de Item 4...</p>
-        </div>
-      </div>
-    </div>
+        <footer className="container-fluid text-center">
+          <p>Footer Text</p>
+        </footer>
+      </body>
+    </>
   );
-};
+}
 
-export default ScrollspyExample;
+export default App;

@@ -9,9 +9,9 @@ function Route() {
     return(
         <>
         <ColorSchemesExample/>
-        {/* <Articles/> */}
+        <Articles/>
         {/* <ContactMsg/> */}
-        <Home/>
+        {/* <Home/> */}
         {/* <Login/> */}
         </>
     )

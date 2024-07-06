@@ -12,8 +12,8 @@ const [admin, setAdmin]= useState(false)
         const idUser=localStorage.getItem("idUser")
         const fetchProducts = async () => {
         try {
-            const fetchedProducts = await fetchGet('http://localhost:3001/products');
-            const user = await fetchGet('http://localhost:3001/users/'+idUser);
+            const fetchedProducts = await fetchGet('http://localhost:3000/products');
+            const user = await fetchGet('http://localhost:3000/users/'+idUser);
             setProducts(fetchedProducts);
             if (user.administrador) {
                 setAdmin(true)
@@ -40,7 +40,7 @@ const [admin, setAdmin]= useState(false)
         }
         };
         try {
-        const createdProduct = await fetchPost(newProduct, 'http://localhost:3001/products');
+        const createdProduct = await fetchPost(newProduct, 'http://localhost:3000/products');
         setProducts([...products, createdProduct]);
         } catch (error) {
         console.error('Error adding product:', error);
@@ -49,7 +49,7 @@ const [admin, setAdmin]= useState(false)
 
     const handleDeleteProduct = async (productId) => {
         try {
-        await fetchDelete(`http://localhost:3001/products/${productId}`);
+        await fetchDelete(`http://localhost:3000/products/${productId}`);
         const updatedProducts = products.filter(product => product.id !== productId);
         setProducts(updatedProducts);
         } catch (error) {
@@ -60,7 +60,7 @@ const [admin, setAdmin]= useState(false)
     const handleEditProduct = async (productId, updatedProductDetails) => {
         try {
         const updatedProduct = { ...products.find(p => p.id === productId), ...updatedProductDetails, image: editedImage || products.find(p => p.id === productId).image };
-            await fetchPut(updatedProduct, `http://localhost:3001/products/${""}`);
+            await fetchPut(updatedProduct, `http://localhost:3000/products/${""}`);
             const updatedProducts = products.map(product =>
             product.id === productId ? updatedProduct : product
         );

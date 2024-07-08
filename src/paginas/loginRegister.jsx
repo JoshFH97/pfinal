@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import {fetchGet, fetchPost} from '../Fetch/Api';
 import { useNavigate } from 'react-router-dom';
+import ColorSchemesExample from '../Componetes/NavBar/NavBar';
 
 
 function Login() {
@@ -52,6 +53,8 @@ function Login() {
   };
 
   return (
+    <>
+    <ColorSchemesExample/>
     <div className="login">
       <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
         <li className="nav-item" role="presentation">
@@ -197,6 +200,7 @@ function Login() {
         )}
       </div>
     </div>
+  </>
   );
 }
 

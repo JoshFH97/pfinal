@@ -1,9 +1,13 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from 'react-router-dom';
+import ColorSchemesExample from '../NavBar/NavBar';
 
-function App() {
+function GeneralInformation() {
+  const navigate = useNavigate()
   return (
     <>
+    <ColorSchemesExample/>
       <head>
         <title>Bootstrap Example</title>
         <meta charSet="utf-8" />
@@ -59,7 +63,7 @@ function App() {
           <div className="row content">
             <div className="col-sm-2 sidenav">
               <p>
-                <a href="#">Link</a>
+                <a onClick={()=>navigate("/ruta")}>Link</a>
               </p>
               <p>
                 <a href="#">Link</a>
@@ -103,4 +107,4 @@ function App() {
   );
 }
 
-export default App;
+export default GeneralInformation;

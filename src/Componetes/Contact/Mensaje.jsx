@@ -1,15 +1,18 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../CSS/mensaje.css'
+import ColorSchemesExample from '../NavBar/NavBar';
 
 const ContactSection = () => {
   return (
     <>
+    
       <link
         href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         rel="stylesheet"
         id="bootstrap-css"
       />
+      <ColorSchemesExample/>
       {/* Contact Us Section */}
       <section className="Material-contact-section section-padding section-dark">
         <div className="container">

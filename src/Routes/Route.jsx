@@ -8,8 +8,8 @@ function Route() {
 
     return(
         <>
-        <ColorSchemesExample/>
-        <Articles/>
+        {/* <ColorSchemesExample/> */}
+        {/* <Articles/> */}
         {/* <ContactMsg/> */}
         {/* <Home/> */}
         {/* <Login/> */}

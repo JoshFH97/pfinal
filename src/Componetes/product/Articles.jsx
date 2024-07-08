@@ -1,5 +1,6 @@
     import React, { useState, useEffect } from 'react';
     import { fetchPut, fetchPost, fetchDelete, fetchGet } from '../../Fetch/Api';
+import ColorSchemesExample from '../NavBar/NavBar';
 
     const ProductSection = () => {
     const [products, setProducts] = useState([]);
@@ -95,6 +96,7 @@ const [admin, setAdmin]= useState(false)
 
     return (
         <section style={{ backgroundColor: "#eee" }}>
+        <ColorSchemesExample/>
         <div className="container py-5">
             <div className="row">
             {products.map(product => (

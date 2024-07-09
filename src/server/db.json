@@ -3,7 +3,7 @@
     {
       "id": "000",
       "name": "Admi1",
-      "email": "Admi1@example.com",
+      "email": "admi1@example.com",
       "password": "Admi1",
       "administrador": true
     },

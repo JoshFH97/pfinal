@@ -44,83 +44,7 @@
   ],
   "products": [
     {
-      "id": "e956",
-      "title": "Editado",
-      "price": 699,
-      "image": "https://example.com/new-product-image.jpg",
-      "details": {
-        "display": "6.5″ Super Retina XDR display1",
-        "cameras": [
-          "Ultra Wide",
-          "Wide",
-          "Telephoto"
-        ],
-        "zoom": "5x Optical zoom range",
-        "capacities": [
-          "128GB",
-          "256GB",
-          "512GB"
-        ]
-      }
-    },
-    {
-      "id": "72d7",
-      "title": "Edita 2",
-      "price": 699,
-      "image": "https://example.com/new-product-image.jpg",
-      "details": {
-        "display": "6.5″ Super Retina XDR display1",
-        "cameras": [
-          "Ultra Wide",
-          "Wide",
-          "Telephoto"
-        ],
-        "zoom": "5x Optical zoom range",
-        "capacities": [
-          "128GB",
-          "256GB",
-          "512GB"
-        ]
-      }
-    },
-    {
-      "id": "ac8c",
-      "title": "Edita 3",
-      "price": 2000,
-      "image": "https://example.com/new-product-image.jpg",
-      "details": {
-        "display": "2000",
-        "cameras": [
-          "2000"
-        ],
-        "zoom": "200",
-        "capacities": [
-          "2000"
-        ]
-      }
-    },
-    {
       "id": "bdd2",
-      "title": "New iPhone",
-      "price": 699,
-      "image": "https://example.com/new-product-image.jpg",
-      "details": {
-        "display": "6.5″ Super Retina XDR display1",
-        "cameras": [
-          "Ultra Wide",
-          "Wide",
-          "Telephoto"
-        ],
-        "zoom": "5x Optical zoom range",
-        "capacities": [
-          "128GB",
-          "256GB",
-          "512GB"
-        ]
-      }
-    },
-    {
-      "id": "b85c",
       "title": "New iPhone",
       "price": 699,
       "image": "https://example.com/new-product-image.jpg",
@@ -156,6 +80,38 @@
           "128GB",
           "256GB",
           "512GB"
+        ]
+      }
+    },
+    {
+      "id": "6ab2",
+      "title": "Moha",
+      "price": 1.15,
+      "image": {},
+      "details": {
+        "display": "rgwg",
+        "cameras": [
+          "sfgwrg"
+        ],
+        "zoom": "gweg",
+        "capacities": [
+          "dgvsdv"
+        ]
+      }
+    },
+    {
+      "id": "6b7a",
+      "title": "Keneth",
+      "price": 10,
+      "image": {},
+      "details": {
+        "display": "rgwg",
+        "cameras": [
+          "sfgwrg"
+        ],
+        "zoom": "gweg",
+        "capacities": [
+          "dgvsdv"
         ]
       }
     }

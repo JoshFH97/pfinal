@@ -27,6 +27,7 @@ function Login() {
       const data = await fetchGet('http://localhost:3000/users');
       const user = data.find(user => user.email === loginEmail && user.password === loginPassword);
       if (user) {
+        localStorage.setItem("idUser",user.id)
         // Lógica de login exitosa
         alert("Login successful!");
         navigate('/'); // Redirigir a la página de inicio u otra página

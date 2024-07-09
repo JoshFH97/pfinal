@@ -4,24 +4,42 @@ import ColorSchemesExample from '../NavBar/NavBar';
 
 const ProductSection = () => {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [editProduct, setEditProduct] = useState(null);
   const [editedImage, setEditedImage] = useState(null);
   const [admin, setAdmin] = useState(false);
+  const [filter, setFilter] = useState({
+    title: '',
+    minPrice: '',
+    maxPrice: '',
+    display: '',
+    cameras: '',
+    zoom: '',
+    capacities: ''
+  });
+  const [loggedIn, setLoggedIn] = useState(false); // State to track if user is logged in
+  const [showAddProductModal, setShowAddProductModal] = useState(false); // State to control modal visibility
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false); // State to control delete confirmation modal
+  const [productIdToDelete, setProductIdToDelete] = useState(null); // State to store product ID to delete
 
   useEffect(() => {
     const idUser = localStorage.getItem("idUser");
+
     const fetchProducts = async () => {
       try {
         const fetchedProducts = await fetchGet('http://localhost:3000/products');
         setProducts(fetchedProducts);
-        
+        setFilteredProducts(fetchedProducts);
+
         if (idUser) {
           const user = await fetchGet(`http://localhost:3000/users/${idUser}`);
           if (user.administrador) {
             setAdmin(true);
           }
+          setLoggedIn(true); // User is logged in
         } else {
           console.warn('No user ID found in localStorage.');
+          setLoggedIn(false); // User is not logged in
         }
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -31,31 +49,29 @@ const ProductSection = () => {
     fetchProducts();
   }, []);
 
-  const handleAddProduct = async () => {
-    const newProduct = {
-      title: "New iPhone",
-      price: 699,
-      image: "https://example.com/new-product-image.jpg",
-      details: {
-        display: "6.5″ Super Retina XDR display1",
-        cameras: ["Ultra Wide", "Wide", "Telephoto"],
-        zoom: "5x Optical zoom range",
-        capacities: ["128GB", "256GB", "512GB"]
-      }
-    };
+  const handleAddProduct = async (newProduct) => {
     try {
       const createdProduct = await fetchPost(newProduct, 'http://localhost:3000/products');
       setProducts([...products, createdProduct]);
+      setFilteredProducts([...filteredProducts, createdProduct]);
+      setShowAddProductModal(false); // Close modal after adding product
     } catch (error) {
       console.error('Error adding product:', error);
     }
   };
 
-  const handleDeleteProduct = async (productId) => {
+  const handleDeleteProduct = (productId) => {
+    setProductIdToDelete(productId);
+    setShowDeleteConfirmation(true);
+  };
+
+  const handleConfirmDelete = async () => {
     try {
-      await fetchDelete(`http://localhost:3000/products/${productId}`);
-      const updatedProducts = products.filter(product => product.id !== productId);
+      await fetchDelete(`http://localhost:3000/products/${productIdToDelete}`);
+      const updatedProducts = products.filter(product => product.id !== productIdToDelete);
       setProducts(updatedProducts);
+      setFilteredProducts(updatedProducts);
+      setShowDeleteConfirmation(false); // Close modal after deleting
     } catch (error) {
       console.error('Error deleting product:', error);
     }
@@ -69,6 +85,7 @@ const ProductSection = () => {
         product.id === productId ? updatedProduct : product
       );
       setProducts(updatedProducts);
+      setFilteredProducts(updatedProducts);
       setEditProduct(null); // Close modal after editing
     } catch (error) {
       console.error('Error updating product:', error);
@@ -96,161 +113,211 @@ const ProductSection = () => {
     }
   };
 
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilter(prevFilter => ({
+      ...prevFilter,
+      [name]: value
+    }));
+  };
+
+  const filterProducts = () => {
+    let filtered = products.filter(product => {
+      return (
+        (filter.title === '' || product.title.toLowerCase().includes(filter.title.toLowerCase())) &&
+        (filter.minPrice === '' || product.price >= parseFloat(filter.minPrice)) &&
+        (filter.maxPrice === '' || product.price <= parseFloat(filter.maxPrice)) &&
+        (filter.display === '' || product.details.display.toLowerCase().includes(filter.display.toLowerCase())) &&
+        (filter.cameras === '' || product.details.cameras.join(', ').toLowerCase().includes(filter.cameras.toLowerCase())) &&
+        (filter.zoom === '' || product.details.zoom.toLowerCase().includes(filter.zoom.toLowerCase())) &&
+        (filter.capacities === '' || product.details.capacities.join(', ').toLowerCase().includes(filter.capacities.toLowerCase()))
+      );
+    });
+    setFilteredProducts(filtered);
+  };
+
+  const handleBuyProduct = (productId) => {
+    if (!loggedIn) {
+      // User is not logged in, handle login logic (redirect to login page or show a message)
+      alert('Please log in to buy this product.');
+      // Optionally, you can redirect to a login page or show a login modal
+    } else {
+      // User is logged in, show a form to buy the product
+      alert(`Form to buy product with ID ${productId} will be displayed.`);
+      // Implement your logic to display a form for purchasing the product
+    }
+  };
+
+  const handleAddNewProduct = async () => {
+    setShowAddProductModal(true); // Show the add product modal
+  };
+
+  const handleSubmitNewProduct = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    const newProduct = {
+      title: formData.get('title'),
+      price: parseFloat(formData.get('price')),
+      image: formData.get('image'),
+      details: {
+        display: formData.get('display'),
+        cameras: formData.get('cameras').split(',').map(camera => camera.trim()),
+        zoom: formData.get('zoom'),
+        capacities: formData.get('capacities').split(',').map(capacity => capacity.trim())
+      }
+    };
+
+    handleAddProduct(newProduct);
+  };
+
   return (
     <section style={{ backgroundColor: "#eee" }}>
-      <ColorSchemesExample/>
+      <ColorSchemesExample />
       <div className="container py-5">
-        <div className="row">
-          {products.map(product => (
-            <div key={product.id} className="col-md-6 col-lg-4 mb-4 mb-md-0">
-              <div className="card text-black">
-                <img
-                  src={product.image}
-                  className="card-img-top"
-                  alt={product.title}
-                />
+        {/* Admin controls for adding new product */}
+        {admin && (
+          <div className="mb-4">
+            <button type="button" className="btn btn-primary" onClick={handleAddNewProduct}>
+              Add New Product
+            </button>
+          </div>
+        )}
+        <div className="row mb-4">
+          <div className="col-12">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">Filter Products</h5>
+                <form className="row g-3">
+                  <div className="col-md-4">
+                    <label htmlFor="filterTitle" className="form-label">Title</label>
+                    <input type="text" className="form-control" id="filterTitle" name="title" value={filter.title} onChange={handleFilterChange} />
+                  </div>
+                  <div className="col-md-2">
+                    <label htmlFor="filterMinPrice" className="form-label">Min Price</label>
+                    <input type="number" className="form-control" id="filterMinPrice" name="minPrice" value={filter.minPrice} onChange={handleFilterChange} />
+                  </div>
+                  <div className="col-md-2">
+                    <label htmlFor="filterMaxPrice" className="form-label">Max Price</label>
+                    <input type="number" className="form-control" id="filterMaxPrice" name="maxPrice" value={filter.maxPrice} onChange={handleFilterChange} />
+                  </div>
+                  <div className="col-md-4">
+                    <label htmlFor="filterDisplay" className="form-label">Display</label>
+                    <input type="text" className="form-control" id="filterDisplay" name="display" value={filter.display} onChange={handleFilterChange} />
+                  </div>
+                  <div className="col-md-4">
+                    <label htmlFor="filterCameras" className="form-label">Cameras</label>
+                    <input type="text" className="form-control" id="filterCameras" name="cameras" value={filter.cameras} onChange={handleFilterChange} />
+                  </div>
+                  <div className="col-md-4">
+                    <label htmlFor="filterZoom" className="form-label">Zoom</label>
+                    <input type="text" className="form-control" id="filterZoom" name="zoom" value={filter.zoom} onChange={handleFilterChange} />
+                  </div>
+                  <div className="col-md-4">
+                    <label htmlFor="filterCapacities" className="form-label">Capacities</label>
+                    <input type="text" className="form-control" id="filterCapacities" name="capacities" value={filter.capacities} onChange={handleFilterChange} />
+                  </div>
+                  <div className="col-12">
+                    <button type="button" className="btn btn-primary" onClick={filterProducts}>Apply Filters</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row row-cols-1 row-cols-md-3 g-4">
+          {filteredProducts.map((product) => (
+            <div key={product.id} className="col">
+              <div className="card h-100">
+                <img src={product.image} className="card-img-top" alt={product.title} />
                 <div className="card-body">
-                  <div className="text-center mt-1">
-                    <h4 className="card-title">{product.title}</h4>
-                    <h6 className="text-primary mb-1 pb-3">Starting at ${product.price}</h6>
-                  </div>
-                  <div className="text-center">
-                    <div
-                      className="p-3 mx-n3 mb-4"
-                      style={{ backgroundColor: "#eff1f2" }}
-                    >
-                      <h5 className="mb-0">Quick Look</h5>
-                    </div>
-                    <div className="d-flex flex-column mb-4">
-                      <span className="h1 mb-0">{product.details?.display || 'N/A'}</span>
-                      <span>{product.details?.cameras?.join(", ") || 'N/A'}</span>
-                    </div>
-                    <div className="d-flex flex-column mb-4">
-                      <span className="h1 mb-0">
-                        <i className="fas fa-camera-retro" />
-                      </span>
-                      <ul className="list-unstyled mb-0">
-                        {product.details?.cameras?.map((camera, index) => (
-                          <li key={index}>{camera}</li>
-                        )) || <li>N/A</li>}
-                      </ul>
-                    </div>
-                    <div className="d-flex flex-column mb-4">
-                      <span className="h1 mb-0">{product.details?.zoom || 'N/A'}</span>
-                    </div>
-                    <div
-                      className="p-3 mx-n3 mb-4"
-                      style={{ backgroundColor: "#eff1f2" }}
-                    >
-                      <h5 className="mb-0">Capacity</h5>
-                    </div>
-                    <div className="d-flex flex-column mb-4 lead">
-                      {product.details?.capacities?.map((capacity, index) => (
-                        <span key={index} className="mb-2">{capacity}</span>
-                      )) || <span className="mb-2">N/A</span>}
-                    </div>
-                  </div>
-                  <div className="d-flex flex-row">
-                    {admin ? (
-                      <>
-                        <button
-                          type="button"
-                          className="btn btn-primary flex-fill me-1"
-                          data-mdb-ripple-color="dark"
-                          onClick={() => openEditModal(product)}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-danger flex-fill ms-1"
-                          onClick={() => handleDeleteProduct(product.id)}
-                        >
-                          Delete
-                        </button>
-                      </>
-                    ) : (
-                      <button
-                        type="button"
-                        className="btn btn-success flex-fill ms-1"
-                      >
-                        Buy
-                      </button>
+                  <h5 className="card-title">{product.title}</h5>
+                  <p className="card-text">Price: ${product.price.toFixed(2)}</p>
+                  <p className="card-text">Display: {product.details.display}</p>
+                  <p className="card-text">Cameras: {product.details.cameras.join(', ')}</p>
+                  <p className="card-text">Zoom: {product.details.zoom}</p>
+                  <p className="card-text">Capacities: {product.details.capacities.join(', ')}</p>
+                      <button className="btn btn-primary" onClick={() => handleBuyProduct(product.id)}>Buy Now</button>
+                  <div className="d-grid gap-2">
+                  
+
+                    {admin && (
+                      <div>
+                        <button className="btn btn-secondary me-2" onClick={() => openEditModal(product)}>Edit</button>
+                        <button className="btn btn-danger" onClick={() => handleDeleteProduct(product.id)}>Delete</button>
+                      </div>
                     )}
                   </div>
                 </div>
               </div>
             </div>
           ))}
-          {/* Add new product button */}
-          <div className="col-md-6 col-lg-4 mb-4 mb-md-0">
-            <div className="card text-black">
-              <div className="card-body">
-                <button
-                  type="button"
-                  className="btn btn-success btn-lg btn-block"
-                  onClick={handleAddProduct}
-                >
-                  Add New Product
-                </button>
+        </div>
+      </div>
+      {/* Modal for adding new product */}
+      {showAddProductModal && (
+        <div className="modal fade show" style={{ display: "block" }}>
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Add New Product</h5>
+                <button type="button" className="btn-close" aria-label="Close" onClick={() => setShowAddProductModal(false)}></button>
               </div>
+              <form onSubmit={handleSubmitNewProduct}>
+                <div className="modal-body">
+                  <div className="mb-3">
+                    <label htmlFor="title" className="form-label">Title</label>
+                    <input type="text" className="form-control" id="title" name="title" required />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="price" className="form-label">Price</label>
+                    <input type="number" className="form-control" id="price" name="price" step="0.01" min="0" required />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="image" className="form-label">Image</label>
+                    <input type="file" className="form-control" id="image" name="image" accept="image/*" onChange={handleImageChange} />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="display" className="form-label">Display</label>
+                    <input type="text" className="form-control" id="display" name="display" />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="cameras" className="form-label">Cameras</label>
+                    <input type="text" className="form-control" id="cameras" name="cameras" />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="zoom" className="form-label">Zoom</label>
+                    <input type="text" className="form-control" id="zoom" name="zoom" />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="capacities" className="form-label">Capacities</label>
+                    <input type="text" className="form-control" id="capacities" name="capacities" />
+                  </div>
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-secondary" onClick={() => setShowAddProductModal(false)}>Cancel</button>
+                  <button type="submit" className="btn btn-primary">Add Product</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Modal for editing product */}
-      {editProduct && (
-        <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}>
-          <div className="modal-dialog" role="document">
+      )}
+      {/* Modal for deleting product */}
+      {showDeleteConfirmation && (
+        <div className="modal fade show" style={{ display: "block" }}>
+          <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Edit Product</h5>
-                <button type="button" className="btn-close" onClick={closeEditModal}></button>
+                <h5 className="modal-title">Confirm Delete</h5>
+                <button type="button" className="btn-close" aria-label="Close" onClick={() => setShowDeleteConfirmation(false)}></button>
               </div>
               <div className="modal-body">
-                <form>
-                  <div className="mb-3">
-                    <label htmlFor="editTitle" className="form-label">Title</label>
-                    <input type="text" className="form-control" id="editTitle" defaultValue={editProduct.title} />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="editPrice" className="form-label">Price</label>
-                    <input type="number" className="form-control" id="editPrice" defaultValue={editProduct.price} />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="editDisplay" className="form-label">Display</label>
-                    <input type="text" className="form-control" id="editDisplay" defaultValue={editProduct.details.display} />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="editCameras" className="form-label">Cameras (comma separated)</label>
-                    <input type="text" className="form-control" id="editCameras" defaultValue={editProduct.details.cameras.join(', ')} />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="editZoom" className="form-label">Zoom</label>
-                    <input type="text" className="form-control" id="editZoom" defaultValue={editProduct.details.zoom} />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="editCapacities" className="form-label">Capacities (comma separated)</label>
-                    <input type="text" className="form-control" id="editCapacities" defaultValue={editProduct.details.capacities.join(', ')} />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="editImage" className="form-label">Image</label>
-                    <input type="file" className="form-control" id="editImage" onChange={handleImageChange} accept="image/*" />
-                  </div>
-                  <button type="button" className="btn btn-primary" onClick={() => {
-                    handleEditProduct(editProduct.id, {
-                      title: document.getElementById('editTitle').value,
-                      price: parseInt(document.getElementById('editPrice').value),
-                      details: {
-                        display: document.getElementById('editDisplay').value,
-                        cameras: document.getElementById('editCameras').value.split(',').map(camera => camera.trim()),
-                        zoom: document.getElementById('editZoom').value,
-                        capacities: document.getElementById('editCapacities').value.split(',').map(capacity => capacity.trim())
-                      }
-                    });
-                  }}>Save Changes</button>
-                </form>
+                <p>Are you sure you want to delete this product?</p>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={() => setShowDeleteConfirmation(false)}>Cancel</button>
+                <button type="button" className="btn btn-danger" onClick={handleConfirmDelete}>Delete</button>
               </div>
             </div>
           </div>

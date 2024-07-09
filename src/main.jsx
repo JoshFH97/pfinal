@@ -9,6 +9,7 @@ import ProductSection from './Componetes/product/Articles.jsx'
 import ContactSection from './Componetes/Contact/Mensaje.jsx'
 import Login from './paginas/loginRegister.jsx'
 
+
 const router = createBrowserRouter([
   {
     path: "/",

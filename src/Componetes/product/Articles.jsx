@@ -13,10 +13,15 @@ const ProductSection = () => {
     const fetchProducts = async () => {
       try {
         const fetchedProducts = await fetchGet('http://localhost:3000/products');
-        const user = await fetchGet(`http://localhost:3000/users/${idUser}`);
         setProducts(fetchedProducts);
-        if (user.administrador) {
-          setAdmin(true);
+        
+        if (idUser) {
+          const user = await fetchGet(`http://localhost:3000/users/${idUser}`);
+          if (user.administrador) {
+            setAdmin(true);
+          }
+        } else {
+          console.warn('No user ID found in localStorage.');
         }
       } catch (error) {
         console.error('Error fetching products:', error);

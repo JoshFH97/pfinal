@@ -4,18 +4,19 @@ import { useNavigate } from 'react-router-dom';
 import ColorSchemesExample from '../NavBar/NavBar';
 
 function GeneralInformation() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <>
-    <ColorSchemesExample/>
-      <head>
-        <title>Bootstrap Example</title>
+      <ColorSchemesExample />
+      <div>
+        {/* Mueve los metadatos al archivo HTML principal */}
+        {/* <title>Bootstrap Example</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
           rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-        />
+        /> */}
         <style>
           {`
             html, body, #root {
@@ -57,13 +58,12 @@ function GeneralInformation() {
             }
           `}
         </style>
-      </head>
-      <body>
+
         <div className="container-fluid text-center content">
           <div className="row content">
             <div className="col-sm-2 sidenav">
               <p>
-                <a onClick={()=>navigate("/ruta")}>Link</a>
+                <a onClick={() => navigate("/ruta")}>Link</a>
               </p>
               <p>
                 <a href="#">Link</a>
@@ -102,7 +102,7 @@ function GeneralInformation() {
         <footer className="container-fluid text-center">
           <p>Footer Text</p>
         </footer>
-      </body>
+      </div>
     </>
   );
 }

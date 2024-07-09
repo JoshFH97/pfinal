@@ -138,6 +138,26 @@
           "512GB"
         ]
       }
+    },
+    {
+      "id": "788b",
+      "title": "New iPhone",
+      "price": 699,
+      "image": "https://example.com/new-product-image.jpg",
+      "details": {
+        "display": "6.5″ Super Retina XDR display1",
+        "cameras": [
+          "Ultra Wide",
+          "Wide",
+          "Telephoto"
+        ],
+        "zoom": "5x Optical zoom range",
+        "capacities": [
+          "128GB",
+          "256GB",
+          "512GB"
+        ]
+      }
     }
   ]
 }

@@ -1,11 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { fetchGet } from '../../Fetch/Api'; // Importa tu función fetchGet para realizar solicitudes GET
 
 function ColorSchemesExample() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
-  const [user, setUser] = useState({ name: 'Joshua Ferreto', email: 'johndoe@example.com' });
+  const [user, setUser] = useState({ name: '', email: '' });
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const idUser = localStorage.getItem("idUser"); // Obtener el ID del usuario desde localStorage
+        if (idUser) {
+          const userData = await fetchGet(`http://localhost:3000/users/${idUser}`);
+          setUser(userData);
+        }
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -14,7 +31,7 @@ function ColorSchemesExample() {
   };
 
   const handleLogout = () => {
-    localStorage.clear()
+    localStorage.clear();
     setUser(null);
     navigate('/Login');
   };
@@ -40,7 +57,7 @@ function ColorSchemesExample() {
             <Button variant="outline-success" type="submit">Search</Button>
           </Form>
           <Nav>
-            {user ? (
+            {user && user.name ? (
               <NavDropdown title={user.name} id="user-dropdown">
                 <NavDropdown.Item onClick={() => navigate('/profile')}>Profile</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => navigate('/settings')}>Settings</NavDropdown.Item>

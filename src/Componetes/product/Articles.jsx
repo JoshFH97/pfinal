@@ -176,7 +176,7 @@ const handleEditProduct = async (productId, updatedProductDetails) => {
 
   return (
     <section style={{ backgroundColor: "#eee" }}>
-      <ColorSchemesExample />
+      <ColorSchemesExample bg='light' text='light'/>
       <div className="container py-5">
         {/* Controles de administrador para agregar nuevo producto */}
         {admin && (

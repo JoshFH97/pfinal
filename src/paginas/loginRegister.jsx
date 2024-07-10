@@ -73,7 +73,7 @@ function Login() {
 
   return (
     <>
-      <ColorSchemesExample className='Navbar'/>
+      <ColorSchemesExample bg='transparent' text='light' className='Navbar'/>
       <div className="login">
         <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
           <li className="nav-item" role="presentation">

@@ -12,7 +12,7 @@ const ContactSection = () => {
         rel="stylesheet"
         id="bootstrap-css"
       />
-      <ColorSchemesExample/>
+      <ColorSchemesExample bg='light' text='light'/>
       {/* Contact Us Section */}
       <section className="Material-contact-section section-padding section-dark">
         <div className="container">

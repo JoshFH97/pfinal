@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { Container, Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { fetchGet } from '../../Fetch/Api'; // Importa tu función fetchGet para realizar solicitudes GET
 
-function ColorSchemesExample() {
+function ColorSchemesExample({bg="light",text="dark"}) {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [user, setUser] = useState({ name: '', email: '' });
@@ -38,7 +39,7 @@ function ColorSchemesExample() {
 
   return (
     <>
-      <Navbar bg="light" variant="light">
+      <Navbar bg={bg} variant={text}>
         <Container fluid>
           <Navbar.Brand onClick={() => navigate("/")}>MovileSmart</Navbar.Brand>
           <Nav className="me-auto">

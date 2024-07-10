@@ -21,6 +21,7 @@ export const fetchGet = async (url) => {
   };
   
   export const fetchPost = async (userData, url) => {
+    console.log(userData)
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -43,11 +44,11 @@ export const fetchGet = async (url) => {
   };
   export const fetchPut = async (userData, url) => {
     try {
-      const response = await fetch(url+userData.id, {
+      const response = await fetch(url, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-        },  
+        },
         body: JSON.stringify(userData)
       });
   
@@ -62,6 +63,8 @@ export const fetchGet = async (url) => {
       throw error;
     }
   };
+  
+
   export const fetchDelete = async (url) => {
     try {
       await fetch(url, {

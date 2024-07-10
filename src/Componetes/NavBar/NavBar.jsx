@@ -45,17 +45,7 @@ function ColorSchemesExample() {
             <Nav.Link onClick={() => navigate('/Productos')}>Products</Nav.Link>
             <Nav.Link onClick={() => navigate('/Contacto')}>Contact</Nav.Link>
           </Nav>
-          <Form className="d-flex" onSubmit={handleSearch}>
-            <FormControl
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Button variant="outline-success" type="submit">Search</Button>
-          </Form>
+
           <Nav>
             {user && user.name ? (
               <NavDropdown title={user.name} id="user-dropdown">

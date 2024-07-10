@@ -106,18 +106,114 @@
       }
     },
     {
-      "id": "6b7a",
-      "title": "Keneth",
-      "price": 10,
+      "id": "1835",
+      "title": "Kenneth",
+      "price": 10000,
       "image": {},
       "details": {
-        "display": "rgwg",
+        "display": "111111111111111",
         "cameras": [
           "sfgwrg"
         ],
         "zoom": "gweg",
         "capacities": [
           "dgvsdv"
+        ]
+      }
+    },
+    {
+      "id": "b3c9",
+      "title": "xxxxxxxxx",
+      "price": 555555,
+      "image": {},
+      "details": {
+        "display": "1111111111111",
+        "cameras": [
+          "sc"
+        ],
+        "zoom": "ad",
+        "capacities": [
+          "as"
+        ]
+      }
+    },
+    {
+      "id": "3ec9",
+      "title": "ZXZ",
+      "price": 95191,
+      "image": {},
+      "details": {
+        "display": "ZX",
+        "cameras": [
+          "xz"
+        ],
+        "zoom": "Zx",
+        "capacities": [
+          "Z"
+        ]
+      }
+    },
+    {
+      "id": "71f4",
+      "title": "ZXZ",
+      "price": 95191,
+      "image": {},
+      "details": {
+        "display": "ZX",
+        "cameras": [
+          "xz"
+        ],
+        "zoom": "Zx",
+        "capacities": [
+          "Z"
+        ]
+      }
+    },
+    {
+      "id": "b335",
+      "title": "ZXZ",
+      "price": 95191,
+      "image": {},
+      "details": {
+        "display": "ZX",
+        "cameras": [
+          "1"
+        ],
+        "zoom": "Zx",
+        "capacities": [
+          "Z"
+        ]
+      }
+    },
+    {
+      "id": "6589",
+      "title": "sgbf4t4g",
+      "price": 2222,
+      "image": {},
+      "details": {
+        "display": "",
+        "cameras": [
+          ""
+        ],
+        "zoom": "",
+        "capacities": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "3005",
+      "title": "99999999",
+      "price": 2222,
+      "image": {},
+      "details": {
+        "display": "",
+        "cameras": [
+          ""
+        ],
+        "zoom": "",
+        "capacities": [
+          ""
         ]
       }
     }

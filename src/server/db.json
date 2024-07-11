@@ -1,0 +1,58 @@
+{
+  "users": [
+    {
+      "id": "000",
+      "name": "Admi1",
+      "email": "admi1@example.com",
+      "password": "Admi1",
+      "administrador": true
+    },
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "john@example.com"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "email": "jane@example.com"
+    },
+    {
+      "id": "9a8e",
+      "name": "1",
+      "email": "1@1.com",
+      "password": "1"
+    },
+    {
+      "id": "e7a8",
+      "name": "1",
+      "email": "1@1.com",
+      "password": "1"
+    },
+    {
+      "id": "7677",
+      "name": "1",
+      "email": "1@1.com",
+      "password": "1"
+    },
+    {
+      "id": "7a92",
+      "name": "1",
+      "email": "1@1.com",
+      "password": "1"
+    },
+    {
+      "id": "791e",
+      "name": "12345",
+      "email": "12345@12345.com",
+      "password": "12345"
+    },
+    {
+      "id": "fc5c",
+      "name": "xxxxx",
+      "email": "xxxxx@xxxxx.com",
+      "password": "xxxxx"
+    }
+  ],
+  "products": []
+}

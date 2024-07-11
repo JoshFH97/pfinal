@@ -8,6 +8,7 @@ const ProductSection = () => {
   const [editProduct, setEditProduct] = useState(null);
   const [editedImage, setEditedImage] = useState(null);
   const [admin, setAdmin] = useState(false);
+  const [base64,setBase64]=useState('')
   const [filter, setFilter] = useState({
     title: '',
     minPrice: '',
@@ -94,27 +95,36 @@ const handleEditProduct = async (productId, updatedProductDetails) => {
 };
 
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    convertTobase64(file)
+    }
+  
+
+  const convertTobase64=(file)=>{
+const reader= new FileReader();
+reader.readAsDataURL(file);
+reader.onloadend=()=>{
+  setBase64(reader.result);
+};
+    
+  
+}
 
   const openEditModal = (product) => {
     setEditProduct(product);
     setEditedImage(product.image); // Initialize edited image with current product image
   };
 
+
+  
+
   const closeEditModal = () => {
     setEditProduct(null);
     setEditedImage(null); // Clear edited image state on modal close
   };
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setEditedImage(reader.result);
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
+
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -162,7 +172,7 @@ const handleEditProduct = async (productId, updatedProductDetails) => {
     const newProduct = {
       title: formData.get('title'),
       price: parseFloat(formData.get('price')),
-      image: formData.get('image'),
+      image: base64,
       details: {
         display: formData.get('display'),
         cameras: formData.get('cameras').split(',').map(camera => camera.trim()),
